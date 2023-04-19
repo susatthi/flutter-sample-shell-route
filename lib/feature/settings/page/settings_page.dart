@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
+import '../../../router.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -17,7 +18,7 @@ class SettingsPage extends ConsumerWidget {
           return ListTile(
             title: Text('設定$index'),
             onTap: () {
-              context.go('/settings/$index');
+              SettingsDetailsRouteData(id: '$index').go(context);
             },
           );
         },

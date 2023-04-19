@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
+import '../../../router.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -12,7 +13,7 @@ class DashboardPage extends ConsumerWidget {
         title: const Text('ダッシュボード'),
         actions: [
           IconButton(
-            onPressed: () => context.go('/cart'),
+            onPressed: () => const CartRouteData().go(context),
             icon: const Icon(Icons.shopping_cart),
           )
         ],

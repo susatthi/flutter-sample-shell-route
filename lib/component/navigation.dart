@@ -2,6 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../router.dart';
+
 enum NavigationItem {
   dashboard(
     label: 'ダッシュボード',
@@ -25,20 +27,33 @@ enum NavigationItem {
   final IconData icon;
   final IconData selectedIcon;
 
-  String get path => this == initial ? '/' : '/$name';
+  String get path {
+    switch (this) {
+      case NavigationItem.dashboard:
+        return DashboardRouteData.path;
+      case NavigationItem.settings:
+        return SettingsRouteData.path;
+    }
+  }
 
-  static NavigationItem get initial => dashboard;
+  void go(BuildContext context) {
+    switch (this) {
+      case NavigationItem.dashboard:
+        const DashboardRouteData().go(context);
+        break;
+      case NavigationItem.settings:
+        const SettingsRouteData().go(context);
+        break;
+    }
+  }
 
   static NavigationItem indexOf(int index) => NavigationItem.values[index];
 
   static NavigationItem? locationOf(String location) {
-    if (location == '/') {
-      return initial;
-    }
-
     final path = Uri.parse(location).path;
     return NavigationItem.values
-        .firstWhereOrNull((e) => e != initial && path.startsWith(e.path));
+        .sorted((a, b) => b.path.length - a.path.length)
+        .firstWhereOrNull((e) => path.startsWith(e.path));
   }
 }
 
@@ -74,7 +89,7 @@ class _NavigationBar extends StatelessWidget {
           .toList(),
       onDestinationSelected: (index) {
         final item = NavigationItem.indexOf(index);
-        context.go(item.path);
+        item.go(context);
       },
     );
   }

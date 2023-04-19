@@ -16,6 +16,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.3.3
+  go_router_builder: ^1.2.1
   pedantic_mono: ^1.21.1
 
 flutter:
