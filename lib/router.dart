@@ -1,25 +1,26 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'component/navigation.dart';
 import 'feature/dashboard/page/dashboard_page.dart';
 import 'feature/error/page/error_page.dart';
-import 'feature/navigation/page/navigation_page.dart';
 import 'feature/settings/page/settings_details_page.dart';
 import 'feature/settings/page/settings_page.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: NavigationItem.initial.path,
     routes: [
       ShellRoute(
-        builder: (context, state, child) => NavigationPage(child: child),
+        builder: (context, state, child) =>
+            ScaffoldWithNavigationBar(child: child),
         routes: [
           GoRoute(
-            path: '/',
+            path: NavigationItem.dashboard.path,
             builder: (context, state) => const DashboardPage(),
           ),
           GoRoute(
-            path: '/settings',
+            path: NavigationItem.settings.path,
             builder: (context, state) => const SettingsPage(),
             routes: [
               GoRoute(
