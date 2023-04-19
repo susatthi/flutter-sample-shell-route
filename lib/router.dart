@@ -17,11 +17,13 @@ final routerProvider = Provider((ref) {
         routes: [
           GoRoute(
             path: NavigationItem.dashboard.path,
-            builder: (context, state) => const DashboardPage(),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: DashboardPage()),
           ),
           GoRoute(
             path: NavigationItem.settings.path,
-            builder: (context, state) => const SettingsPage(),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SettingsPage()),
             routes: [
               GoRoute(
                 path: ':id',
