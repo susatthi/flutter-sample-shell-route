@@ -61,7 +61,11 @@ class DashboardRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: DashboardPage());
+    return NoTransitionPage(
+      child: DashboardPage(
+        key: state.pageKey,
+      ),
+    );
   }
 }
 
@@ -73,8 +77,10 @@ class CartRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const MaterialPage(
-      child: CartPage(),
+    return MaterialPage(
+      child: CartPage(
+        key: state.pageKey,
+      ),
       fullscreenDialog: true,
     );
   }
@@ -87,7 +93,11 @@ class SettingsRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: SettingsPage());
+    return NoTransitionPage(
+      child: SettingsPage(
+        key: state.pageKey,
+      ),
+    );
   }
 }
 
@@ -102,6 +112,9 @@ class SettingsDetailsRouteData extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SettingsDetailsPage(id: int.tryParse(id));
+    return SettingsDetailsPage(
+      key: state.pageKey,
+      id: int.tryParse(id),
+    );
   }
 }
